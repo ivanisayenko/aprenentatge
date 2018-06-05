@@ -8,7 +8,7 @@ Repositori on aprenc tecnologies noves
 - Angular
 - TypeScript
 
-#Angular JS
+#* Angular JS
 + Serveis
 + Controladors
 + Directives

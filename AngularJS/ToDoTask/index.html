@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="toDo">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="controller.js"></script>
+    <link rel="stylesheet" type="text/css" href="estil.css">
+    <title>To Do Task</title>
+</head>
+
+<body ng-controller="toDoController">
+    <h1>Tasques per fer</h1>
+    <input type="text" ng-model="tasca" />
+    <input type="button" ng-click="newTask()" value="Afegir nova tasca" />
+    <input type="button" ng-click="eliminarTotFet()" value="Elimina totes les tasques fetes" />
+    <ul>
+        <li class="tasca" ng-repeat="task in tasques">
+            <!-- <span ng-if="isChecked(task)">
+                <input type="checkbox" ng-click="marcar(task)" checked>
+            </span>
+            <span ng-if="!isChecked(task)">
+                <input type="checkbox" ng-click="marcar(task)">
+            </span> -->
+            <input ng-checked="isChecked(task)" type="checkbox" ng-click="marcar(task)">
+            <b>{{task}}</b> &nbsp;
+            <input type="checkbox" ng-click="eliminar(task)"> Eliminar
+        </li>
+    </ul>
+</body>
+
+</html>
