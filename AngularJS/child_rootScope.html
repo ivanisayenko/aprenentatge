@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="aplicacio">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="estil.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RootScope i ChildController</title>
+    <script>
+        angular.module("aplicacio", [])
+            //run s'executa un cop declarat l'aplicació
+            .run(function($rootScope){
+                $rootScope.nombre = "Ivan";
+            })
+
+            .controller("controller", function($scope, $timeout){
+                $timeout(function(){
+                    $scope.nombre = "Actualitzo el meu nom en el controller: Ivan Isayenko"
+                }, 2000);
+            })
+
+            .controller("childController", function($scope){
+
+            })
+    </script>
+</head>
+
+<body ng-controller="controller">
+    {{nombre}}
+    <p ng-if="nombre!='Ivan'">Podem veure igualment la variable root: {{$parent.$parent.nombre}}</p>
+    <!-- El controlador nou hereda automaticament tots els metodes i variables del
+    controlador pare. L'herencia es efectua mitjançan el document html -->
+    <div ng-controller="childController">
+        -----------------------------------------<br>
+        Aquest es el controlador que ha heredat les seves variables: {{nombre}}
+        <p>Pero també podem trucar a la variable root: {{$parent.$parent.nombre}}</p>
+    </div>
+</body>
+
+</html>
