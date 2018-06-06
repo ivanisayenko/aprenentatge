@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="eventos">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="estil.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Events AngularJS</title>
+    <script>
+        angular.module("eventos", [])
+            .controller("controllerEventos", function ($scope) {
+                $scope.contador = 2;
+                $scope.nombre = "Ivan";
+
+                setTimeout(function () {
+                    //El $apply envia peticio a $digest 
+                    //per a que actualitzi informació
+                    //aquest es escoltat per angular.
+                    //Aquest metode verifica si hi ha canvis
+                    //i actualitza l'informació
+                    //també podem utilitzar $timeout() que fa aquest procés
+                    //automaticament,
+                    $scope.$apply(function(){
+                        $scope.nombre = "Ivan Isayenko (actualitzat amb $apply())";
+                    });
+                }, $scope.contador * 1000);
+            }); 
+    </script>
+</head>
+
+<body ng-controller="controllerEventos">
+    <p>{{nombre}}</p>
+</body>
+
+</html>
