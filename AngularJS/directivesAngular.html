@@ -23,6 +23,7 @@
                 $scope.misReposCoincidencia = [];
                 $scope.resultatAjax = [];
                 $scope.cercar = null;
+                $scope.ocultar = true;
 
                 $http.get("https://api.github.com/users/ivanisayenko/repos")
                     .then(function (response) {
@@ -31,19 +32,6 @@
                             $scope.misRepos.push($scope.resultatAjax.data[nombreRepo].name);
                         }
                     });
-
-                $scope.coincidenciaCercar = function () {
-                    var coincidencia = false;
-                    $scope.misReposCoincidencia = [];
-                    for (miRepo of $scope.misRepos) {
-                        if ((miRepo.toLowerCase()).indexOf($scope.cercar) != -1) {
-                            coincidencia = true;
-                            $scope.misReposCoincidencia.push(miRepo);
-                        }
-                    }
-                    if (coincidencia && $scope.cercar != "") return true
-                    else return false;
-                }
 
                 $scope.mostrarCercar = function () {
                     $scope.ocultar = false;
@@ -79,6 +67,15 @@
                     //en el cercador
                     scope.$watch(attrs.ngModel, function (value) {
                         scope.cercar = value;
+                        //cerquem coincidencies
+                        scope.misReposCoincidencia = [];
+                        for (miRepo of scope.misRepos) {
+                            if ((miRepo.toLowerCase()).indexOf(value) != -1) {
+                                scope.misReposCoincidencia.push(miRepo);
+                            }
+                        }
+                        //si la paraula que cerquem esta buida, no mostrem les possibles opcions
+                        if (value == "") scope.misReposCoincidencia = [];
                     })
                 }
             })
@@ -88,8 +85,8 @@
 <body ng-controller="controller">
     <div id="informacioGit>">
         <h1>Els meus projectes de GitHub son: </h1>
-        <input ng-mouseover="mostrarCercar()" ng-mouseleave="ocultarCercar()" type="text" search="" ng-model="test" placeholder="Cerca un repositori">
-        <div ng-mouseover="mostrarCercar()" ng-mouseleave="ocultarCercar()" ng-hide="ocultar" id="opcions" ng-if="coincidenciaCercar()">
+        <input ng-mouseenter="mostrarCercar()" ng-mouseleave="ocultarCercar()" type="text" search="" ng-model="test" placeholder="Cerca un repositori">
+        <div ng-mouseenter="mostrarCercar()" ng-mouseleave="ocultarCercar()" ng-hide="ocultar" id="opcions">
             <p> &nbsp; Coincidencies que hem trobat... </p>
             <ul>
                 <li ng-repeat="miRepo in misReposCoincidencia">
