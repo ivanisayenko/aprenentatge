@@ -7,12 +7,3 @@ Repositori on aprenc tecnologies noves
 # En un futur m'agradaria veure:
 - Angular
 - TypeScript
-
-#* Angular JS
-+ Serveis
-+ Controladors
-+ Directives
-+ Filtres
-+ Moduls
-+ ng-app, ng-controller(controlador), ng-init(inicialització), ng-model(el model), ng-bind(mostra informació)
-- Model - Vista - Controlador

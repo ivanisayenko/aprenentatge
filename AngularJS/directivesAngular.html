@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="application">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="estil.css">
+    <title>Directives</title>
+    <style>
+        #opcions {
+            list-style: none;
+            background-color: whitesmoke;
+            border: 1px solid royalblue;
+        }
+    </style>
+    <script>
+        angular.module("application", [])
+
+            .controller("controller", function ($scope, $http) {
+                $scope.misRepos = [];
+                $scope.misReposCoincidencia = [];
+                $scope.resultatAjax = [];
+                $scope.cercar = null;
+
+                $http.get("https://api.github.com/users/ivanisayenko/repos")
+                    .then(function (response) {
+                        $scope.resultatAjax = response;
+                        for (nombreRepo in $scope.resultatAjax.data) {
+                            $scope.misRepos.push($scope.resultatAjax.data[nombreRepo].name);
+                        }
+                    });
+
+                $scope.coincidenciaCercar = function () {
+                    var coincidencia = false;
+                    $scope.misReposCoincidencia = [];
+                    for (miRepo of $scope.misRepos) {
+                        if ((miRepo.toLowerCase()).indexOf($scope.cercar) != -1) {
+                            coincidencia = true;
+                            $scope.misReposCoincidencia.push(miRepo);
+                        }
+                    }
+                    if (coincidencia && $scope.cercar != "") return true
+                    else return false;
+                }
+
+                $scope.mostrarCercar = function () {
+                    $scope.ocultar = false;
+                }
+
+                $scope.ocultarCercar = function () {
+                    $scope.ocultar = true;
+                }
+            })
+
+            //directiva que ens mostra la imatgve rodona
+            //es fa per estalviar teclejar codi repetitivament
+            .directive("imatgeRodona", function () {
+                return function (scope, element, attrs) {
+                    attrs.$observe("imatgeRodona", function (value) {
+                        element.css({
+                            "background": `url(${value})`,
+                            "width": "100px",
+                            "height": "100px",
+                            "background-position": "center",
+                            "background-size": "cover",
+                            "border-radius": "50%",
+                            "border": "1px royalblue solid"
+                        });
+                    })
+                }
+            })
+
+            //directiva per cercar reposityories en la pagina
+            .directive("search", function () {
+                return function (scope, element, attrs) {
+                    //observa constantmet els posbiles canvis que es poden realitzar
+                    //en el cercador
+                    scope.$watch(attrs.ngModel, function (value) {
+                        scope.cercar = value;
+                    })
+                }
+            })
+    </script>
+</head>
+
+<body ng-controller="controller">
+    <div id="informacioGit>">
+        <h1>Els meus projectes de GitHub son: </h1>
+        <input ng-mouseover="mostrarCercar()" ng-mouseleave="ocultarCercar()" type="text" search="" ng-model="test" placeholder="Cerca un repositori">
+        <div ng-mouseover="mostrarCercar()" ng-mouseleave="ocultarCercar()" ng-hide="ocultar" id="opcions" ng-if="coincidenciaCercar()">
+            <p> &nbsp; Coincidencies que hem trobat... </p>
+            <ul>
+                <li ng-repeat="miRepo in misReposCoincidencia">
+                    {{miRepo}}
+                </li>
+            </ul>
+        </div>
+        <ul>
+            <li ng-repeat="rep in resultatAjax.data" ng-hide="rep.name != cercar && cercar != '' && cercar != null">
+                <div imatge-rodona="{{rep.owner.avatar_url}}"></div>
+                {{rep.name}}
+                <br>
+                <a href="{{rep.html_url}}">{{rep.html_url}}</a>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
