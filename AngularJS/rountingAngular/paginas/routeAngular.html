@@ -1,0 +1,26 @@
+<div id="informacioGit>">
+    <input style="width: 100%; height:30px; text-align: center" type="text" ng-model="nomRepo" placeholder="Quin repositori vols cercar?">
+    <span>*Indica el nom de l'usuari</span>
+    <h1>Els projectes de Github de {{nomRepo}} son: </h1>
+    <input style="width: 100%; height:30px; text-align: center" ng-mouseenter="mostrarCercar()" ng-mouseleave="ocultarCercar()"
+        type="text" search="" ng-model="test" placeholder="Cerca en el repositori">
+    <div style="position: absolute" ng-mouseenter="mostrarCercar()" ng-mouseleave="ocultarCercar()" ng-hide="ocultar" id="opcions">
+        <p> &nbsp; Coincidencies que hem trobat... </p>
+        <ul>
+            <li ng-repeat="miRepo in misReposCoincidencia">
+                {{miRepo}}
+            </li>
+        </ul>
+    </div>
+    <ul>
+        <li ng-repeat="rep in resultatAjax.data" ng-hide="rep.name != cercar && cercar != '' && cercar != null">
+            <div imatge-rodona="{{rep.owner.avatar_url}}"></div>
+            <h2>
+                <a href="#!/repo/{{nomRepo}}/{{rep.name}}">{{rep.name}}</a>
+            </h2>
+            <h3>{{rep.description}}</h3>
+            <br/>
+        </li>
+
+    </ul>
+</div>
