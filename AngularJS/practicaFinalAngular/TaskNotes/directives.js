@@ -1,0 +1,2 @@
+angular.module("application")
+    .directive()

@@ -1,0 +1,14 @@
+<ul id="notes">
+    <li class="nota" ng-repeat="nota in todesNotes">
+        <div>
+            <a class="modificarNota" href="#!/modificar/{{nota.titol}}">✎</a>
+            <button class="eliminarNota" ng-click="eliminarNota(nota)">X</button>
+        </div>
+        <span>Titol: </span>{{nota.titol}}
+        <br>
+        <span>Tasca: </span>{{nota.nota}}
+        <br>
+        <span>Per Quan: </span>{{nota.quan}}
+    </li>
+</ul>
+<a class="botoAfegirNota" href="#!/afegir">+</a>

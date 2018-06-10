@@ -1,0 +1,76 @@
+.nota{
+    width: 250px;
+    height: 250px;
+    overflow: auto;
+    background-color: rgb(245, 245, 126);
+    border: 1px rgb(231, 247, 88) solid;
+    float: left;
+    list-style: none;
+    padding: 5px;
+    margin: 5px;
+}
+
+.botoAfegirNota, .botoTornar{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: white;
+    text-align: center;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: tomato;
+    font-size: 38px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+body{
+    background-color: whitesmoke;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    width: 90%;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.modificarNota, .eliminarNota{
+    height: 20px;
+    background: none;
+    border: none;
+    font-size: 23px;
+    text-decoration: none;
+    color: royalblue;
+    clear: both;
+    cursor: pointer;
+}
+
+span{
+    color: brown;
+}
+
+.afegir{
+    width: 100%;
+    height: 30px;
+}
+
+.mensaje{
+    background: lightgreen;
+}
+
+.botoAfegir{
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    background: none;
+    border: none;
+    font-size: 33px;
+    text-decoration: underline;
+    color: royalblue;
+    background: lightyellow;
+    cursor: pointer;
+}
+
+.des{
+    height: 100px;
+}
+

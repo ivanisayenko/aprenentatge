@@ -1,0 +1,10 @@
+<h1>Afegim una nova nota</h1>
+<h3>Titol</h3>
+<input class="afegir" type="text" maxlength="15" ng-model="titol">
+<h3>Descipció</h3>
+<textarea class="afegir des" type="text" ng-model="descripcio"></textarea>
+<h3>Per Quan</h3>
+<input class="afegir" type="text" ng-model="quan">
+<button class="botoAfegir" ng-if="descripcio != null && quan != null && titol != null && descripcio != '' && quan!= '' && titol!= ''"
+ ng-click="afegirNota()">Afegir Nota</button>
+ <a class="botoTornar" href="#!/">←</a>
