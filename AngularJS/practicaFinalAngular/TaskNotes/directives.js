@@ -1,2 +1,2 @@
 angular.module("application")
-    .directive()
+//     .directive()
