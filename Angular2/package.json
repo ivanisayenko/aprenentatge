@@ -1,0 +1,22 @@
+{
+  "name": "angular2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@angular/common": "^6.0.4",
+    "@angular/compiler": "^6.0.4",
+    "@angular/core": "^6.0.4",
+    "@angular/http": "^6.0.4",
+    "@angular/platform-browser": "^6.0.4",
+    "@angular/platform-browser-dynamic": "^6.0.4",
+    "@angular/router": "^6.0.4",
+    "@angular/router-deprecated": "^2.0.0-rc.2",
+    "express": "^4.16.3"
+  }
+}
