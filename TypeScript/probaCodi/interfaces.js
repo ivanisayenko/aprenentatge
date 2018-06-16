@@ -1,9 +1,15 @@
 "use strict";
+class Ciutat {
+    //han de ser publics si o si
+    constructor(ciutat, codiPostal) {
+        this.ciutat = ciutat;
+        this.codiPostal = codiPostal;
+    }
+}
 class Random {
-    constructor(paraula) {
+    constructor(paraulaRandom) {
+        this.paraulaRandom = paraulaRandom;
         this.nombreRandom = Math.random() * (10000);
-        this.paraulaRandom = "";
-        this.paraulaRandom = paraula;
     }
     getNombre() {
         return this.nombreRandom;
@@ -11,7 +17,15 @@ class Random {
     getParaula() {
         return this.paraulaRandom;
     }
+    novaCiutat(ciutat) {
+        console.log(`Hem afegit una ciutat nova: ${ciutat.ciutat} amb el codi postal ${ciutat.codiPostal}`);
+    }
 }
-let random = new Random("prova de interface");
-console.log(random.getNombre());
-console.log(random.getParaula());
+let ciutats = new Random("Llista de ciutats");
+// console.log(random.getNombre());
+console.log(ciutats.getParaula());
+//podem afegir directament objectes d'interfaces
+ciutats.novaCiutat({ ciutat: "Barcelona", codiPostal: 08900 });
+//o podem crear un objecte nou mitjançnat constructor d'una clase
+//que implementa aquesta interface 
+ciutats.novaCiutat(new Ciutat("Madrid", 0972));

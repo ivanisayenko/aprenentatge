@@ -1,0 +1,8 @@
+<h2 *ngIf="!cargado">Cargando ...</h2>
+<ul>
+  <li class="meusRepositoris" *ngFor="let repo of meuRepositri">
+    <b>Nom: </b>{{repo.name}}
+    <br>
+    <b>Descripcció: </b>{{repo.description}}
+  </li>
+</ul>

@@ -1,0 +1,10 @@
+.meusRepositoris{
+    padding: 10px;
+    list-style: none;
+    background: gold;
+    border: 1px solid royalblue;
+    margin: 4px;
+    color:black;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+}
