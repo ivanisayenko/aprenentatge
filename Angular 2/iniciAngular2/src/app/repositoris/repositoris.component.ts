@@ -9,11 +9,18 @@ export class RepositorisComponent implements OnInit {
   misastgePersonalitzat: String = 'Això es un nou component';
   meuRepositri: any;
   cargado: boolean = false;
+  repositoriSeleccionat: IRepo = { name: "cap repositori", description: "cap" };
+  repositoriAfegir: IRepo = { name: "", description: "" };
 
   constructor() { }
 
-  ngOnInit() {
+  newRepo() {
+    this.meuRepositri.push({ name: this.repositoriAfegir.name, description: this.repositoriAfegir.description });
+    this.repositoriAfegir.name = "";
+    this.repositoriAfegir.description = "";
+  }
 
+  ngOnInit() {
     setTimeout(() => {
       this.meuRepositri = [{
         name: "Prova 1",
@@ -32,7 +39,12 @@ export class RepositorisComponent implements OnInit {
         description: "TypeScript m'agrada moltissim"
       }];
       this.cargado = true;
-    }, 3000);
+    }, 1000);
   }
 
+}
+
+interface IRepo {
+  name: string;
+  description: string;
 }

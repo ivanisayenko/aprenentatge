@@ -1,7 +1,8 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
+
 import { RepositorisComponent } from './repositoris/repositoris.component';
 
 @NgModule({
@@ -9,9 +10,7 @@ import { RepositorisComponent } from './repositoris/repositoris.component';
     AppComponent,
     RepositorisComponent
   ],
-  imports: [
-    BrowserModule
-  ],
+  imports: [BrowserModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent]
 })
