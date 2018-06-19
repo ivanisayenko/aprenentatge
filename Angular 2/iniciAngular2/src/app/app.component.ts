@@ -7,4 +7,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Angular 2';
+  variablePerParametre: string = "";
+
+  constructor(
+    // private router: Router,
+  ) { }
+  
+  novaVariable(){
+    // console.log(this.variablePerParametre);
+    // this.router.navigate(["/redi", this.variablePerParametre]);
+    this.variablePerParametre = "";
+    
+  }
 }

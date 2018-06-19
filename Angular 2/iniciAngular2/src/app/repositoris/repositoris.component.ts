@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RepositorisService } from './repositoris.service';
 
 @Component({
   selector: 'app-repositoris',
@@ -7,12 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RepositorisComponent implements OnInit {
   misastgePersonalitzat: String = 'Això es un nou component';
-  meuRepositri: any;
+  meuRepositri: any = [];
   cargado: boolean = false;
   repositoriSeleccionat: IRepo = { name: "cap repositori", description: "cap" };
   repositoriAfegir: IRepo = { name: "", description: "" };
 
-  constructor() { }
+  constructor(private repoService: RepositorisService) { }
 
   newRepo() {
     this.meuRepositri.push({ name: this.repositoriAfegir.name, description: this.repositoriAfegir.description });
@@ -22,24 +23,15 @@ export class RepositorisComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      this.meuRepositri = [{
-        name: "Prova 1",
-        description: "Aixo es una prova del meu component personalitzat"
-      },
-      {
-        name: "Prova 2",
-        description: "M'agrada molt aprendre diferents frameworks i llenguatges de programació"
-      },
-      {
-        name: "Prova 3",
-        description: "Angular 2 no té res a veure amb la seva primera versió"
-      },
-      {
-        name: "Prova 4",
-        description: "TypeScript m'agrada moltissim"
-      }];
+      this.meuRepositri[0] = ({name: 1, description: 1});
+      this.repoService.getRepos().subscribe((data)=>{
+        for(let index of data.json()){
+          this.meuRepositri.push({name: index.full_name, description: index.description});
+        }
+      });
       this.cargado = true;
     }, 1000);
+    
   }
 
 }
