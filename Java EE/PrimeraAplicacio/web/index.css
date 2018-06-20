@@ -33,3 +33,14 @@ a:hover{
     color:royalblue;
     cursor: pointer;
 }
+form{
+    text-align: center;
+    padding-top: 20px;
+}
+input{
+    margin: 5px;
+    padding: 5px;
+}
+button{
+    margin: 5px;
+}
