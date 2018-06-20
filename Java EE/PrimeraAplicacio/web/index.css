@@ -1,0 +1,35 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 20-jun-2018, 14:35:22
+    Author     : ivani
+*/
+
+body{
+    width: 80%;
+    margin: auto;
+    background-color: snow;
+    margin-top: 30px;
+    font-family: Tahoma, Geneva, sans-serif
+}
+.titol{
+    background-color: lightskyblue;
+    color: white;
+    padding-left: 10px;
+    text-shadow: 1px 1px 1px black;
+}
+a{
+    background-color: royalblue;
+    padding: 3px;
+    border: 1px blue inset;
+    text-decoration: none;
+    color: white;
+}
+a:hover{
+    background-color: white;
+    color:royalblue;
+    cursor: pointer;
+}
