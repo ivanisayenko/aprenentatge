@@ -44,3 +44,6 @@ input{
 button{
     margin: 5px;
 }
+.tomato{
+    background-color: tomato !important;
+}

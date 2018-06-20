@@ -26,8 +26,10 @@ public class FormulariServlet extends HttpServlet {
         //variables del formulari
         String nick = request.getParameter("nick");
         String contrasenya = request.getParameter("contra");
-        
-        
+
+        //navegador qeu estem utilitzant
+        String nav = request.getHeader("User-Agent");
+
         try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -36,13 +38,16 @@ public class FormulariServlet extends HttpServlet {
             out.println("<title>Servlet nou</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Usuari: "+ nick +"</h1>");
-            out.println("<h1>Contrasenya: "+ contrasenya +"</h1>");
+            out.println("<h1>Usuari: " + nick + "</h1>");
+            out.println("<h1>Contrasenya: " + contrasenya + "</h1>");
+            if (nav != null) {
+                out.println("<h1>El navegadopr que utilitzas es: " + nav + "</h1>");
+            }
             out.println("</body>");
             out.println("</html>");
         }
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -50,8 +55,7 @@ public class FormulariServlet extends HttpServlet {
         //variables del formulari
         String nick = request.getParameter("nick");
         String contrasenya = request.getParameter("contra");
-        
-        
+
         try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
