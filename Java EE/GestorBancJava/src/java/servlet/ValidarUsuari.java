@@ -5,7 +5,7 @@ package servlet;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import classes.Usuari;
+import model.Usuari;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.Integer.parseInt;
@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.ConexioMongo;
 
 /**
  *
@@ -98,9 +99,9 @@ public class ValidarUsuari extends HttpServlet {
 
     protected boolean isUsuariExisteix(String usuari, int contrasenya, Usuari[] usuarisRegistrats, int usuarisRegistratsNum) {
         boolean existeix = false;
-        for (int i = 0; i < usuarisRegistratsNum; i ++) {
+        for (int i = 0; i < usuarisRegistratsNum; i++) {
             System.out.println("verificant usuari");
-            if (usuarisRegistrats[i].getUsuari().equals(usuari) 
+            if (usuarisRegistrats[i].getUsuari().equals(usuari)
                     && usuarisRegistrats[i].getContrasenya() == contrasenya) {
                 existeix = true;
                 break;

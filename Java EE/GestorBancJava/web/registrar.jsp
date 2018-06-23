@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="main">
-            <form action="registrarUsuari" method="post" name="registrarUsuari">
+            <form action="RegistrarUsuari" method="post" name="registrarUsuari">
                 <input type="text" name="usuari" placeholder="usuari" required>
                 <br>
                 <input type="number" name="contrasenya" placeholder="contrasenya" required>
@@ -34,7 +34,6 @@
                 <input type="submit" value="Registrat">
             </form>
             <p style="text-align: center">Si ja tens un compte creat, pots <a href="iniciar.jsp">iniciar la teva sessió</a></p>
-            <p>Atenció, aquest servei no etsa disponible ja que no s'utilitza una BBDD de veritat</p>
         </div>
     </body>
 

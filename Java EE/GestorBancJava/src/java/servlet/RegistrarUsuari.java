@@ -5,13 +5,16 @@
  */
 package servlet;
 
+import model.Usuari;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Integer.parseInt;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.ConexioMongo;
 
 /**
  *
@@ -19,6 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "RegistrarUsuari", urlPatterns = {"/RegistrarUsuari"})
 public class RegistrarUsuari extends HttpServlet {
+
+    ConexioMongo conexio = new ConexioMongo();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,16 +38,21 @@ public class RegistrarUsuari extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegistrarUsuari</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegistrarUsuari at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            Usuari nouUsusari = new Usuari(
+                    request.getParameter("nom"),
+                    request.getParameter("cognom"),
+                    request.getParameter("usuari"),
+                    parseInt(request.getParameter("contrasenya")),
+                    parseInt(request.getParameter("edat"))
+            );
+
+            //verifiquem que usuari no existeixi
+            if (conexio.usuariExistent(true, nouUsusari)) {
+                response.sendRedirect("registrar.jsp");
+            } else {
+                conexio.usuariNou(nouUsusari);
+                response.sendRedirect("registreCorrecte.jsp");
+            }
         }
     }
 
