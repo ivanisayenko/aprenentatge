@@ -34,4 +34,14 @@ input{
 .boto:hover{
     background: lightgrey;
 }
+.botons{
+/*    background: lightskyblue;*/
+    padding: 15px;
+    padding-bottom: 25px;
+    /*border-radius: 3px 3px 3px 3px;*/
+    border-bottom: 1px black solid;
+}
+img{
+    margin: auto;
+}
 
