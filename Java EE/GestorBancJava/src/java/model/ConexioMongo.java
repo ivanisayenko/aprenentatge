@@ -38,7 +38,7 @@ public class ConexioMongo {
         } else if (!registrar) {
             BasicDBObject query = new BasicDBObject();
             query.put("nick", nouUsuari.getUsuari());
-            query.put("contr", nouUsuari.getContrasenya());
+            query.put("conr", nouUsuari.getContrasenya());
             objecte = collection.find(query);
         }
         if (objecte.count() > 0) {

@@ -28,6 +28,11 @@ public class Usuari {
         this.numRegistrats++;
     }
 
+    public Usuari(String usuari, int contrasenya) {
+        this.usuari = usuari;
+        this.contrasenya = contrasenya;
+    }
+
     public void ferAdministrador() {
         this.rol = "administrador";
     }

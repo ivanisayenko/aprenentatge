@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.ConexioMongo;
 
 /**
@@ -34,15 +35,17 @@ public class ValidarUsuari extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Usuari[] usuarisRegistrats = generarUsuaris();
+        ConexioMongo conexio = new ConexioMongo();
+        HttpSession sessio = request.getSession();
         String usuari = request.getParameter("usuari");
         int contrasenya = parseInt(request.getParameter("contrasenya"));
-        int usuarisRegistratsNum = 2;
+        Usuari nouUsuari = new Usuari(usuari, contrasenya);
 
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            if (isUsuariExisteix(usuari, contrasenya, usuarisRegistrats, usuarisRegistratsNum)) {
+            if (conexio.usuariExistent(false, nouUsuari)) {
+                sessio.setAttribute(usuari, nouUsuari);
                 response.sendRedirect("iniciCorrecte.jsp");
             } else {
                 response.sendRedirect("iniciIncorrecte.jsp");
@@ -88,25 +91,4 @@ public class ValidarUsuari extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    protected Usuari[] generarUsuaris() {
-        Usuari[] usuarisRegistrats = new Usuari[100];
-        usuarisRegistrats[0] = new Usuari("Ivan", "Isayenko", "ivanisayenko", 123, 22);
-        usuarisRegistrats[1] = new Usuari("Pedro", "Sanchez", "pedrosanchez", 321, 40);
-        usuarisRegistrats[0].ferAdministrador();
-        return usuarisRegistrats;
-    }
-
-    protected boolean isUsuariExisteix(String usuari, int contrasenya, Usuari[] usuarisRegistrats, int usuarisRegistratsNum) {
-        boolean existeix = false;
-        for (int i = 0; i < usuarisRegistratsNum; i++) {
-            System.out.println("verificant usuari");
-            if (usuarisRegistrats[i].getUsuari().equals(usuari)
-                    && usuarisRegistrats[i].getContrasenya() == contrasenya) {
-                existeix = true;
-                break;
-            }
-        }
-        return existeix;
-    }
 }

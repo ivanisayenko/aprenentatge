@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Inicia Sessio</title>
         <link rel="stylesheet" type="text/css" href="resources/estil.css">
+        <script src="resources/desarUsuariSessio.js"></script>
     </head>
     <body>
         <div class="nav">
@@ -25,7 +26,8 @@
                 <br>
                 <input type="number" name="contrasenya" placeholder="contrasenya" required>
                 <br>
-                <input type="submit" value="Iniciar">
+                <input id="iniciar" type="submit" value="Iniciar">
+
             </form>
             <p style="text-align: center">Si no tens un compte creat, pots <a href="registrar.jsp">registra-te</a> completament gratuit</p>
         </div>
