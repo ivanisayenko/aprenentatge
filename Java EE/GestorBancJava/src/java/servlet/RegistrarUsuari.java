@@ -45,7 +45,11 @@ public class RegistrarUsuari extends HttpServlet {
                     parseInt(request.getParameter("contrasenya")),
                     parseInt(request.getParameter("edat"))
             );
-
+            //verifiquem si l'usuri que es registra no es administrador
+            if(request.getParameter("codi").equals("admin123")){
+                nouUsusari.ferAdministrador();
+            }
+            
             //verifiquem que usuari no existeixi
             if (conexio.usuariExistent(true, nouUsusari)) {
                 response.sendRedirect("registrar.jsp");

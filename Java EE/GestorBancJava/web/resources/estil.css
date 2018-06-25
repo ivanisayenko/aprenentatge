@@ -35,7 +35,7 @@ input{
     background: lightgrey;
 }
 .botons{
-/*    background: lightskyblue;*/
+    /*    background: lightskyblue;*/
     padding: 15px;
     padding-bottom: 25px;
     /*border-radius: 3px 3px 3px 3px;*/
@@ -43,5 +43,59 @@ input{
 }
 img{
     margin: auto;
+}
+.codi{
+    font-size: 10px;
+}
+.usuari{
+    padding: 10px;
+    border: 1px royalblue solid;
+    width: 150px;
+    height: 200px;
+    background: lightblue;
+    margin: 20px;
+    float: left;
+}
+.usuari spam{
+    text-transform: uppercase;
+}
+.usuari:hover{
+    background: lightcyan;
+    cursor: pointer;
+}
+.botoUsuari{
+    margin: 10px;
+    border: 1px solid royalblue;
+    width: 23.3%;
+    height: 150px;
+    font-size: 30px;
+    text-align: center;
+    padding-top: 120px;
+    background: lightblue;
+    color: ghostwhite;
+    text-shadow: 1px 1px 5px black;
+    float: left;
+    box-shadow: 4px 4px 9px lightslategrey;
+}
+.botoUsuari:hover{
+    cursor: pointer;
+    box-shadow: 6px 6px 12px grey;
+}
+@media only screen and (max-width: 655px) {
+    .botoUsuari{
+        width: 95%;
+    }
+}
+.TOMATO{
+    background: tomato !important;
+}
+.PERU{
+    background: peru !important;
+}
+.SALMON{
+    background: salmon !important;
+}
+.GOLD{
+    background: GOLD !important;
 }
 

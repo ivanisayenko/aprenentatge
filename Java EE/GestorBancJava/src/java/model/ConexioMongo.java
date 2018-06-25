@@ -47,6 +47,23 @@ public class ConexioMongo {
         return existent;
     }
 
+    public boolean isUsuariAdmin(Usuari usuari) throws UnknownHostException {
+        boolean isAdministrador = false;
+        DBCollection collection = conexioMongo("gestorBanc", "usuaris");
+        DBCursor objecte = null;
+        DBObject o = null;
+        BasicDBObject query = new BasicDBObject();
+        query.put("nick", usuari.getUsuari());
+        objecte = collection.find(query);
+        while (objecte.hasNext()) {
+            o = objecte.next();
+        }
+        if (o.get("rol").equals("administrador")) {
+            isAdministrador = true;
+        }
+        return isAdministrador;
+    }
+
     public void usuariNou(Usuari user) throws UnknownHostException {
         DBCollection collection = conexioMongo("gestorBanc", "usuaris");
         BasicDBObject nouUsuari = new BasicDBObject();
@@ -55,7 +72,27 @@ public class ConexioMongo {
         nouUsuari.put("nom", user.getNom());
         nouUsuari.put("cognom", user.getCognom());
         nouUsuari.put("edat", user.getEdat());
+        nouUsuari.put("rol", user.getRol());
         collection.insert(nouUsuari);
+    }
+
+    public Usuari[] getAllUsers() throws UnknownHostException {
+        int cont = 0;
+        DBCursor objecte = conexioMongo("gestorBanc", "usuaris").find();
+        Usuari[] usuaris = new Usuari[objecte.count()];
+        while (objecte.hasNext()) {
+            DBObject o = objecte.next();
+            usuaris[cont] = (new Usuari(
+                    (String) o.get("nom"),
+                    (String) o.get("cognom"),
+                    (String) o.get("nick"),
+                    (int) o.get("conr"),
+                    (int) o.get("edat"),
+                    (String) o.get("rol")
+            ));
+            cont++;
+        }
+        return usuaris;
     }
 
     //es fan conexions dem ongo al document i colecció indicat per parametres
@@ -70,5 +107,9 @@ public class ConexioMongo {
             System.out.println(e);
         }
         return collection;
+    }
+
+    private String tosTring(String nom) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

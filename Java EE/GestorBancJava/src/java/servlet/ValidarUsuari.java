@@ -45,8 +45,11 @@ public class ValidarUsuari extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             if (conexio.usuariExistent(false, nouUsuari)) {
-                sessio.setAttribute(usuari, nouUsuari);
-                response.sendRedirect("iniciCorrecte.jsp");
+                if (conexio.isUsuariAdmin(nouUsuari)) {
+                    response.sendRedirect("iniciAdministrador.jsp");
+                } else {
+                    response.sendRedirect("iniciUsuari.jsp");
+                }
             } else {
                 response.sendRedirect("iniciIncorrecte.jsp");
             }

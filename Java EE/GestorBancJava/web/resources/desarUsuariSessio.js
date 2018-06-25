@@ -7,8 +7,6 @@ window.onload = () => {
     function desarUsuari() {
         var usuari = document.getElementsByName("usuari")[0].value;
         var contr = document.getElementsByName("contrasenya")[0].value;
-        console.log(usuari);
-        console.log(contr);
         var user = {
             nom: usuari,
             contr: contr

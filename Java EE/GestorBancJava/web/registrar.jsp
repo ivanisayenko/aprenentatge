@@ -31,6 +31,9 @@
                 <br>
                 <input type="number" name="edat" placeholder="edat" required>
                 <br>
+                <input type="text" name="codi" placeholder="codi administrador" optional>
+                <p class="codi">*Si tens un codi per registrar-te com a administrador</p>
+                <br>
                 <input type="submit" value="Registrat">
             </form>
             <p style="text-align: center">Si ja tens un compte creat, pots <a href="iniciar.jsp">iniciar la teva sessió</a></p>

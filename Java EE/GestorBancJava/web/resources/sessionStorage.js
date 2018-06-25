@@ -4,8 +4,18 @@
  * and open the template in the editor.
  */
 window.onload = () => {
-    var nomUsuari = JSON.parse(sessionStorage.user);
-    document.getElementById("nomUsuari").innerHTML = nomUsuari.nom;
+    var nomUsuari;
+    try {
+        nomUsuari = JSON.parse(sessionStorage.user);
+        document.getElementById("nomUsuari").innerHTML = nomUsuari.nom;
+    } catch (error) {
+        nomUsuari = null;
+        alert("Inicia la teva sessió");
+        window.location.replace("iniciar.jsp");
+    }
+    document.getElementById("sortir").addEventListener("click", function (e) {
+        sessionStorage.removeItem('user');
+    });
 }
 
 

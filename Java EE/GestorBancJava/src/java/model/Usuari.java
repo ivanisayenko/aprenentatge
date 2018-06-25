@@ -27,10 +27,24 @@ public class Usuari {
         this.edat = edat;
         this.numRegistrats++;
     }
+    
+    public Usuari(String nom, String cognom, String usuari, int contrasenya, int edat, String rol) {
+        this.nom = nom;
+        this.cognom = cognom;
+        this.usuari = usuari;
+        this.contrasenya = contrasenya;
+        this.edat = edat;
+        this.rol = rol;
+        this.numRegistrats++;
+    }
 
     public Usuari(String usuari, int contrasenya) {
         this.usuari = usuari;
         this.contrasenya = contrasenya;
+    }
+
+    public String getRol() {
+        return this.rol;
     }
 
     public void ferAdministrador() {
