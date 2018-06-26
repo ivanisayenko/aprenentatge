@@ -10,7 +10,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="resources/estil.css">
-        <script src="resources/sessionStorage.js"></script>
         <title>Tot correcte</title>
     </head>
     <body>
@@ -25,10 +24,12 @@
             </div>
         </div>
         <div class="main" style="margin: auto">
-            <div class="botoUsuari GOLD">Ingresar Diners</div>
-            <div class="botoUsuari PERU">Retirar Diners</div>
-            <div class="botoUsuari SALMON">Fer Pagament</div>
-            <div class="botoUsuari TOMATO">Modificar dades</div>
+            <div id="ingresar" class="botoUsuari GOLD">Ingresar Diners</div>
+            <div id="retirar" class="botoUsuari PERU">Retirar Diners</div>
+            <div id="pagar" class="botoUsuari SALMON">Fer Pagament</div>
+            <div id="moidifcar" class="botoUsuari TOMATO">Modificar dades</div>
         </div> 
     </body>
+    <script type="text/javascript" src="resources/sessionStorage.js"></script>
+    <script type="text/javascript" src="resources/accionsUsuari.js"></script>
 </html>

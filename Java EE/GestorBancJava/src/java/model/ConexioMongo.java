@@ -17,7 +17,12 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.lang.Iterable;
+import java.util.Set;
 
 /**
  *
@@ -74,6 +79,7 @@ public class ConexioMongo {
         nouUsuari.put("edat", user.getEdat());
         nouUsuari.put("rol", user.getRol());
         collection.insert(nouUsuari);
+        compteNou(user);
     }
 
     public Usuari[] getAllUsers() throws UnknownHostException {
@@ -111,5 +117,103 @@ public class ConexioMongo {
 
     private String tosTring(String nom) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void compteNou(Usuari user) throws UnknownHostException {
+        DBCollection compte = conexioMongo("gestorBanc", "compte");
+        BasicDBObject usuari = new BasicDBObject();
+        BasicDBObject diners = new BasicDBObject();
+        BasicDBObject moviments = new BasicDBObject();
+
+        usuari.put("user", user.getUsuari());
+        diners.put("quantitat", 0);
+        usuari.put("diners", diners);
+        usuari.put("moviments", new BasicDBObject());
+
+        compte.insert(usuari);
+    }
+
+    public int getQuantitat(String user) throws UnknownHostException {
+        DBCollection compte = conexioMongo("gestorBanc", "compte");
+        BasicDBObject usuari = new BasicDBObject();
+        usuari.put("user", user);
+        DBCursor objecte = compte.find(usuari);
+        int quantitat = 0;
+        while (objecte.hasNext()) {
+            DBObject o = objecte.next();
+            DBObject d = (DBObject) o.get("diners");
+            quantitat = (int) d.get("quantitat");
+        }
+        return quantitat;
+    }
+
+    public List<Moviment> getMoviments(String user) throws UnknownHostException {
+        DBCollection compte = conexioMongo("gestorBanc", "compte");
+        BasicDBObject usuari = new BasicDBObject();
+        List<Moviment> moviment = new ArrayList<Moviment>();
+
+        usuari.put("user", user);
+        DBCursor objecte = compte.find(usuari);
+        while (objecte.hasNext()) {
+            DBObject o = objecte.next();
+            DBObject d = (DBObject) o.get("moviments");
+            //agafem els valors dels moviment(0, 1, 2, 3..)
+            Set<String> keys = d.keySet();
+            for (String k : keys) {
+                //agafem informacio dels valors
+                DBObject Moviment = (DBObject) d.toMap().get(k);
+                //finalment agafem informacio convertint l'objecte al map
+                moviment.add(new Moviment(
+                        (String) Moviment.toMap().get("descripcio"),
+                        (String) Moviment.toMap().get("dia"),
+                        (String) Moviment.toMap().get("tipus"),
+                        (int) Moviment.toMap().get("quantitat")
+                ));
+            }
+        }
+        return moviment;
+    }
+
+    public void afegirMoviment(Moviment moviment, String user) throws UnknownHostException {
+        DBCollection compte = conexioMongo("gestorBanc", "compte");
+        BasicDBObject usuari = new BasicDBObject();
+        BasicDBObject dadesMoviment = new BasicDBObject();
+
+        dadesMoviment.put("descripcio", moviment.getDescripcio());
+        dadesMoviment.put("dia", moviment.getDia());
+        dadesMoviment.put("tipus", moviment.getTipus());
+        dadesMoviment.put("quantitat", moviment.getQuantitat());
+
+        usuari.put("user", user);
+
+        BasicDBObject update = new BasicDBObject();
+        update.put("$push", new BasicDBObject("moviments", dadesMoviment));
+
+        compte.update(usuari, update, true, true);
+    }
+
+    public void sumarDiners(int suma, String user) throws UnknownHostException {
+        //actualizar el documento 
+        int dinersActual = getQuantitat(user);
+        DBCollection compte = conexioMongo("gestorBanc", "compte");
+        BasicDBObject usuari = new BasicDBObject();
+        BasicDBObject quantitat = new BasicDBObject();
+        BasicDBObject setQuery = new BasicDBObject();
+        BasicDBObject searchQuery = new BasicDBObject();
+
+        searchQuery.append("user", user);
+        usuari.append("user", user);
+        quantitat.append("quantitat", dinersActual + suma);
+        usuari.append("diners", quantitat);
+        setQuery.append("$set", usuari);
+
+        //actualitzem el compte i afegim un moviment(suma de diners)
+        compte.update(searchQuery, setQuery);
+        afegirMoviment(new Moviment(
+                "afegida diners compte",
+                "26/06/2018",
+                "+",
+                suma
+        ), user);
     }
 }

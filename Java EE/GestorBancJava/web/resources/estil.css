@@ -98,4 +98,32 @@ img{
 .GOLD{
     background: GOLD !important;
 }
+.moviments{
+    margin: auto;
+    text-align: center;
+    width: 100%;
+}
+.ultimsMoviments{
+    margin: auto;
+    text-align: center;
+    width: 100%;
+    background: white;
+    border: 1px black solid;
+}
+td{
+    padding: 10px;
+    border-bottom: 1px lightgray solid;
+}
+.descripcio{
+    padding-right: 100px;
+}
+#dinersCompte{
+    font-size: 30px;
+}
+#ingresarDiners{
+    margin: 10px;
+    /*border: 1px black solid;*/
+    padding: 5px;
+    margin-bottom: 70px;
+}
 
