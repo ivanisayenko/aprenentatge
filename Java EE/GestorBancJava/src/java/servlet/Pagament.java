@@ -7,7 +7,6 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.Integer.parseInt;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,13 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.ConexioMongo;
+import static java.lang.Integer.parseInt;
 
 /**
  *
  * @author ivani
  */
-@WebServlet(name = "IngresarDiners", urlPatterns = {"/IngresarDiners"})
-public class IngresarDiners extends HttpServlet {
+@WebServlet(name = "Pagament", urlPatterns = {"/Pagament"})
+public class Pagament extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,12 +36,14 @@ public class IngresarDiners extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
             ConexioMongo conexio = new ConexioMongo();
             HttpSession sessio = request.getSession();
+            String rao = (String) request.getParameter("rao");
+            int quantitat = parseInt(request.getParameter("quantitat"));
             
-            int sumar = parseInt(request.getParameter("quantitat"));
-            conexio.canviDiners(sumar, (String)sessio.getAttribute("usuari"), false, "Ingres de diners");
-            response.sendRedirect("accionsUsuari/ingresarDiners.jsp");
+            conexio.canviDiners(quantitat, (String)sessio.getAttribute("usuari"), true,  rao);
+            response.sendRedirect("accionsUsuari/pagament.jsp");
         }
     }
 
@@ -83,5 +85,4 @@ public class IngresarDiners extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

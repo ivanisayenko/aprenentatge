@@ -22,6 +22,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.lang.Iterable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -29,6 +32,9 @@ import java.util.Set;
  * @author ivani
  */
 public class ConexioMongo {
+
+    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    Date date = new Date();
 
     public boolean usuariExistent(boolean registrar, Usuari nouUsuari) throws UnknownHostException {
         boolean existent = false;
@@ -128,9 +134,14 @@ public class ConexioMongo {
         usuari.put("user", user.getUsuari());
         diners.put("quantitat", 0);
         usuari.put("diners", diners);
-        usuari.put("moviments", new BasicDBObject());
 
         compte.insert(usuari);
+        afegirMoviment(new Moviment(
+                "creació del compte",
+                dateFormat.format(date),
+                "~",
+                0
+        ), user.getUsuari());
     }
 
     public int getQuantitat(String user) throws UnknownHostException {
@@ -163,7 +174,7 @@ public class ConexioMongo {
                 //agafem informacio dels valors
                 DBObject Moviment = (DBObject) d.toMap().get(k);
                 //finalment agafem informacio convertint l'objecte al map
-                moviment.add(new Moviment(
+                moviment.add(0, new Moviment(
                         (String) Moviment.toMap().get("descripcio"),
                         (String) Moviment.toMap().get("dia"),
                         (String) Moviment.toMap().get("tipus"),
@@ -192,7 +203,7 @@ public class ConexioMongo {
         compte.update(usuari, update, true, true);
     }
 
-    public void sumarDiners(int suma, String user) throws UnknownHostException {
+    public void canviDiners(int suma, String user, boolean retirar, String rao) throws UnknownHostException {
         //actualizar el documento 
         int dinersActual = getQuantitat(user);
         DBCollection compte = conexioMongo("gestorBanc", "compte");
@@ -203,17 +214,59 @@ public class ConexioMongo {
 
         searchQuery.append("user", user);
         usuari.append("user", user);
-        quantitat.append("quantitat", dinersActual + suma);
+        if (!retirar) {
+            quantitat.append("quantitat", dinersActual + suma);
+            afegirMoviment(new Moviment(
+                    rao,
+                    dateFormat.format(date),
+                    "+",
+                    suma
+            ), user);
+        } else {
+            quantitat.append("quantitat", dinersActual - suma);
+            afegirMoviment(new Moviment(
+                    rao,
+                    dateFormat.format(date),
+                    "-",
+                    suma
+            ), user);
+        }
         usuari.append("diners", quantitat);
         setQuery.append("$set", usuari);
 
-        //actualitzem el compte i afegim un moviment(suma de diners)
+        //actualitzem el compte
         compte.update(searchQuery, setQuery);
-        afegirMoviment(new Moviment(
-                "afegida diners compte",
-                "26/06/2018",
-                "+",
-                suma
-        ), user);
+    }
+
+    public Usuari getUser(String nick) throws UnknownHostException {
+        Usuari rUsuari = null;
+        DBCollection coll = conexioMongo("gestorBanc", "usuaris");
+        BasicDBObject usuari = new BasicDBObject();
+        usuari.put("nick", nick);
+        DBCursor objecte = coll.find(usuari);
+        while (objecte.hasNext()) {
+            DBObject o = objecte.next();
+            rUsuari = new Usuari(
+                    (String) o.get("nom"),
+                    (String) o.get("cognom"),
+                    nick,
+                    (int) o.get("conr"),
+                    (int) o.get("edat")
+            );
+        }
+        return rUsuari;
+    }
+
+    public void updateUser(Usuari user) throws UnknownHostException {
+        BasicDBObject usuari = new BasicDBObject();
+        BasicDBObject actualitzar = new BasicDBObject();
+        BasicDBObject newDocument = new BasicDBObject();
+        usuari.put("nick", user.getUsuari());
+        actualitzar.append("nom", user.getNom());
+        actualitzar.put("cognom", user.getCognom());
+        actualitzar.put("edat", user.getEdat());
+        newDocument.append("$set", actualitzar);
+        DBCollection usuaris = conexioMongo("gestorBanc", "usuaris");
+        usuaris.update(usuari, newDocument);
     }
 }

@@ -15,13 +15,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.ConexioMongo;
+import model.Usuari;
 
 /**
  *
  * @author ivani
  */
-@WebServlet(name = "IngresarDiners", urlPatterns = {"/IngresarDiners"})
-public class IngresarDiners extends HttpServlet {
+@WebServlet(name = "ModificarDades", urlPatterns = {"/ModificarDades"})
+public class ModificarDades extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,12 +37,16 @@ public class IngresarDiners extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            ConexioMongo conexio = new ConexioMongo();
             HttpSession sessio = request.getSession();
-            
-            int sumar = parseInt(request.getParameter("quantitat"));
-            conexio.canviDiners(sumar, (String)sessio.getAttribute("usuari"), false, "Ingres de diners");
-            response.sendRedirect("accionsUsuari/ingresarDiners.jsp");
+            Usuari user = new Usuari(
+                    request.getParameter("nom"),
+                    request.getParameter("cognom"),
+                    parseInt(request.getParameter("edat")),
+                    sessio.getAttribute("usuari").toString()
+            );
+            ConexioMongo conexio = new ConexioMongo();
+            conexio.updateUser(user);
+            response.sendRedirect("accionsUsuari/modificarDades.jsp");
         }
     }
 

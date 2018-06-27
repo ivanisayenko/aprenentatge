@@ -20,8 +20,8 @@ import model.ConexioMongo;
  *
  * @author ivani
  */
-@WebServlet(name = "IngresarDiners", urlPatterns = {"/IngresarDiners"})
-public class IngresarDiners extends HttpServlet {
+@WebServlet(name = "RetiradaDiners", urlPatterns = {"/RetirarDiners"})
+public class RetirarDiners extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,9 +39,9 @@ public class IngresarDiners extends HttpServlet {
             ConexioMongo conexio = new ConexioMongo();
             HttpSession sessio = request.getSession();
             
-            int sumar = parseInt(request.getParameter("quantitat"));
-            conexio.canviDiners(sumar, (String)sessio.getAttribute("usuari"), false, "Ingres de diners");
-            response.sendRedirect("accionsUsuari/ingresarDiners.jsp");
+            int retirar = parseInt(request.getParameter("quantitat"));
+            conexio.canviDiners(retirar, (String)sessio.getAttribute("usuari"), true, "Retirada de diners");
+            response.sendRedirect("accionsUsuari/retirarDiners.jsp");
         }
     }
 

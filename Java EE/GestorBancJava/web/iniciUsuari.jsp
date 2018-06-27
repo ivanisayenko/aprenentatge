@@ -27,7 +27,7 @@
             <div id="ingresar" class="botoUsuari GOLD">Ingresar Diners</div>
             <div id="retirar" class="botoUsuari PERU">Retirar Diners</div>
             <div id="pagar" class="botoUsuari SALMON">Fer Pagament</div>
-            <div id="moidifcar" class="botoUsuari TOMATO">Modificar dades</div>
+            <div id="modificar" class="botoUsuari TOMATO">Modificar dades</div>
         </div> 
     </body>
     <script type="text/javascript" src="resources/sessionStorage.js"></script>

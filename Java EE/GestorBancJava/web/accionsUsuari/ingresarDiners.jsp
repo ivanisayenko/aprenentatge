@@ -37,6 +37,7 @@
                 </form>
             </div>
             <div class="ultimsMoviments">
+                <h2>Els teus ultims moviments</h2>
                 <table class="moviments">
                     <%
                         List<Moviment> moviments = conexio.getMoviments(session.getAttribute("usuari").toString());
@@ -46,7 +47,7 @@
                         <td class="descripcio"><%=m.getDescripcio()%></td>
                         <td class="data"><%=m.getDia()%></td>
                         <td class="tipus"><%=m.getTipus()%>
-                            <%=m.getQuantitat()%></td>
+                            <%=m.getQuantitat()%>€</td>
                     </tr>
                     <%
                         }

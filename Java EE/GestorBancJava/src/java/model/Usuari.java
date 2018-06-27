@@ -28,6 +28,13 @@ public class Usuari {
         this.numRegistrats++;
     }
     
+    public Usuari(String nom, String cognom, int edat, String usuari) {
+        this.nom = nom;
+        this.cognom = cognom;
+        this.edat = edat;
+        this.usuari = usuari;
+    }
+    
     public Usuari(String nom, String cognom, String usuari, int contrasenya, int edat, String rol) {
         this.nom = nom;
         this.cognom = cognom;
