@@ -12,8 +12,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="resources/estil.css">
-        <script src="resources/sessionStorage.js"></script>
-        <title>Tot correcte</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <title>Administrador</title>
     </head>
     <body>
         <div class="nav">
@@ -27,16 +27,12 @@
             </div>
         </div>
         <div class="main">
-            Que podras fer aqui?
-             - Eliminar usuaris
-             - Modificar usuaris
-             - Canviar estalvis dels clients
-             - Consultar informació
             <div>
                 <h3>Usuaris Registrats:</h3>
                 <%
                     ConexioMongo conexio = new ConexioMongo();
                     for (Usuari u : conexio.getAllUsers()) {
+                        if (!u.getUsuari().equals(session.getAttribute("usuari").toString())) {
                 %>
                 <div class="usuari">
                     <h2><%=u.getUsuari()%></h2>
@@ -44,12 +40,16 @@
                     <div><b>Cognom:</b> <spam><%=u.getCognom()%></spam></div>
                     <div><b>Edat:</b> <spam><%=u.getEdat()%></spam></div>
                     <div><b>Rol:</b> <spam><%=u.getRol()%></spam></div>
+                    <input id="<%=u.getUsuari()%>" type="button" value="donar de baixa" name="donarBaixa">
                 </div>
                 <%
+                        }
                     }
                 %>
             </div>
         </div> 
+        <script src="resources/sessionStorage.js"></script>
+        <script src="resources/eliminarUsuari.js"></script>
     </body>
 </html>
 

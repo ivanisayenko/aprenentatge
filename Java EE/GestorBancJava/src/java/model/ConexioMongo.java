@@ -269,4 +269,17 @@ public class ConexioMongo {
         DBCollection usuaris = conexioMongo("gestorBanc", "usuaris");
         usuaris.update(usuari, newDocument);
     }
+    
+    public void BaixaUsuari(String user) throws UnknownHostException{
+        DBCollection usuaris = conexioMongo("gestorBanc", "usuaris");
+        DBCollection compte = conexioMongo("gestorBanc", "compte");
+        BasicDBObject usuari = new BasicDBObject();
+        BasicDBObject compt = new BasicDBObject();
+        
+        usuari.put("nick", user);
+        compt.put("user", user);
+        
+        usuaris.remove(usuari);
+        compte.remove(compt);
+    }
 }

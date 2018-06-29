@@ -60,8 +60,8 @@ img{
     text-transform: uppercase;
 }
 .usuari:hover{
-    background: lightcyan;
-    cursor: pointer;
+/*    background: lightcyan;
+    cursor: pointer;*/
 }
 .botoUsuari{
     margin: 10px;
