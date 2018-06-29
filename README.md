@@ -10,7 +10,7 @@
 - programari utilitzat per Angular2
 - diverses pràctiques
 
-#Java EE
+# Java EE
 - pràctica per crear aplicacions web
 - Servlets
 - JSP
