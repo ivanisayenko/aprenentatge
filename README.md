@@ -17,3 +17,4 @@
 - Comunciació client-servidor
 - Creació d'un projecte de gestor d'un banc
 - El projecte té depenedenciès amb MongoDB. En el projecte s'utilitza el modèl MVC, Servlets(servidor), JSP(client), AJAX(comunicacio JS-Servlet)
+- SWING creació d'aplicacions amb interfície (creacio d'un programa que envia correus electrònics)
