@@ -1,0 +1,14 @@
+#afegirNotaNova{
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 2px #4db6ac solid;
+    padding: 5px;
+    border-radius: 3px;
+    background: white;
+    z-index: 1000;
+}
+body{
+    position:relative;
+}
+

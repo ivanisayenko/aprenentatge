@@ -9,3 +9,14 @@
     text-align: left;
     cursor: pointer;
 }
+
+.afegirNoptaNova{
+    border: 1px solid #4db6ac ;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+.tamanyFix{
+    overflow: scroll;
+    height: 70vh;
+}
