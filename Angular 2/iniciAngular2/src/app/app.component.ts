@@ -1,5 +1,6 @@
 import { Component, ViewChild, AfterViewInit, Input } from '@angular/core';
-import { RepositorisService } from './repositoris/repositoris.service';
+import { AutentificacioService } from "./autentificacio.service";
+
 
 @Component({
     selector: 'app-root',
@@ -7,27 +8,6 @@ import { RepositorisService } from './repositoris/repositoris.service';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    title = 'Angular';
-    variablePerParametre: string = "";
-    mostrarAfegirNota: boolean = false;
-    repositoriAfegir: IRepo = { name: "", description: "" };
-    constructor(private repoService: RepositorisService) { }
-
-    novaVariable() {
-        // console.log(this.variablePerParametre);
-        // this.router.navigate(["/redi", this.variablePerParametre]);
-        this.variablePerParametre = "";
-    }
-    
-
-    afegirNovaNota() {
-        this.repoService.newRepo({
-            name: this.repositoriAfegir.name, 
-            description: this.repositoriAfegir.description, 
-        });
-    }
+    constructor(private autentificacio: AutentificacioService) { }
 }
-interface IRepo {
-    name: string;
-    description: string;
-}
+

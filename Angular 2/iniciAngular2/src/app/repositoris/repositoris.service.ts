@@ -19,7 +19,6 @@ export class RepositorisService {
     }
 
     newRepo(objecte: IRepo) {
-        console.log(objecte);
         this.meuRepositri.push({ name: objecte.name, description: objecte.description });
         objecte.name = "";
         objecte.description = "";
