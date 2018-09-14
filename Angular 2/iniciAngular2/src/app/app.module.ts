@@ -18,6 +18,9 @@ import { EventService } from "./event.service";
 import { RouterModule } from '@angular/router';
 import { AutentGuard } from './autent.guard';
 import { TokenInterceptorService } from './token-interceptor.service';
+import { HomeComponent } from './home/home.component';
+import { NotesComponent } from './notes/notes.component';
+import { TasquesComponent } from './tasques/tasques.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +31,10 @@ import { TokenInterceptorService } from './token-interceptor.service';
         IniciarComponent,
         NavegacioComponent,
         SpecialEventsComponent,
-        EventsComponent
+        EventsComponent,
+        HomeComponent,
+        NotesComponent,
+        TasquesComponent
     ],
     imports: [
         BrowserModule,

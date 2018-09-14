@@ -16,6 +16,7 @@ export class IniciarComponent implements OnInit {
     ) { }
 
     dadesUsuari = {usuari:"", contrasenya:""};
+    mantenirSessio: Boolean = false;
 
     ngOnInit() {
     }
@@ -27,8 +28,13 @@ export class IniciarComponent implements OnInit {
                 .subscribe(
                     res => {
                         console.log(res);
-                        this.desarToken(res.token);
-                        this.rutes.navigate(['/navegacio']);
+                        if(!this.mantenirSessio){
+                            this.desarTokenTemporal(res.token);
+                        }else{
+                            this.desarToken(res.token);
+                        }   
+                        
+                        this.rutes.navigate(['/notes']);
                     },
                     err =>{
                         console.log(err);
@@ -37,7 +43,12 @@ export class IniciarComponent implements OnInit {
                 )
         }else{
             alert("Els camps no poden estar buits!");
+            console.log(this.mantenirSessio);
         }
+    }
+
+    desarTokenTemporal(token){
+        sessionStorage.setItem('token', token);
     }
 
     desarToken(token){

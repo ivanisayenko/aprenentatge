@@ -1,16 +1,56 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div class="container row white" style="padding: 5px; padding-bottom: 100px;">
+<div class="container row white" >
     <!-- <h1>
           Benvinguts a {{ title }}!
         </h1> -->
-    <a routerLink="" class="btn boton">Home</a>
-    <a routerLink="iniciar" *ngIf="!autentificacio.usuariLogeat()" class="btn boton blue darken-1">Iniciar Sessió</a>
-    <a routerLink="navegacio" *ngIf="autentificacio.usuariLogeat()" class="btn boton blue darken-1">Disponible iniciant sessio</a>
-    <a routerLink="" *ngIf="autentificacio.usuariLogeat()" (click)="autentificacio.eliminarToken()" class="btn boton">Sortir</a>
+    <!-- <nav class="blue darken-3">
+        <a routerLink="" class="waves-effect waves-light btn boton blue accent-1">Home</a>
+        <a routerLink="iniciar" *ngIf="!autentificacio.usuariLogeat()" class="btn boton blue accent-1">Iniciar Sessió</a>
+        <a routerLink="notes" *ngIf="autentificacio.usuariLogeat()" class="btn boton blue accent-1">Meves Notes</a>
+        <a routerLink="" *ngIf="autentificacio.usuariLogeat()" (click)="autentificacio.eliminarToken()" class="btn boton blue accent-1">Sortir</a>
+    </nav> -->
+    <nav class="blue darken-2 ">
+        <div class="nav-wrapper">
+            <a style="padding-left: 10px;" routerLink="" >Home</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a routerLink="tasques" *ngIf="autentificacio.usuariLogeat()" >Tasques</a></li>
+                <li><a routerLink="iniciar" *ngIf="!autentificacio.usuariLogeat()" >Iniciar Sessió</a></li>
+                <li><a routerLink="notes" *ngIf="autentificacio.usuariLogeat()" >Meves Notes</a></li>
+                <li><a routerLink="" *ngIf="autentificacio.usuariLogeat()" (click)="autentificacio.eliminarToken()" >Sortir</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <!-- <a routerLink="redi" class="btn boton">Anar a routing</a> -->
     <!-- <input type="text" placeholder="varibale per passar en routes" [(ngModel)]="variablePerParametre">
         <a *ngIf="variablePerParametre != ''" routerLink="redi/{{variablePerParametre}}" (click)="novaVariable()" class="btn">Anar a routing amb variable</a> -->
     <!-- <app-repositoris></app-repositoris> -->
     <router-outlet></router-outlet>
     <!-- <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="> -->
+    <footer class="page-footer blue darken-3 z-depth-2">
+            <div class="container">
+              <div class="row">
+                <div class="col l6 s12">
+                  <h5 class="white-text">Projecte de pràctica</h5>
+                  <p class="grey-text text-lighten-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum gravida lacus vitae est vestibulum, a fermentum nibh egestas. Aliquam et mauris quis dolor aliquet suscipit id rhoncus arcu. </p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                  <h5 class="white-text">Links</h5>
+                  <ul>
+                    <li><a class="grey-text text-lighten-3" href="https://github.com/ivanisayenko/practica/tree/master/Angular%202">Github Angular</a></li>
+                    <li><a class="grey-text text-lighten-3" href="https://angular.io/">Angular</a></li>
+                    <li><a class="grey-text text-lighten-3" href="https://nodejs.org/es/">Node</a></li>
+                    <li><a class="grey-text text-lighten-3" href="https://www.mongodb.com/">MongoDB</a></li>
+                    <li><a class="grey-text text-lighten-3" href="https://materializecss.com/themes.html">MaterializeCSS</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="footer-copyright">
+              <div class="container">
+              © 2018 Copyright JAJAJA
+              <a class="grey-text text-lighten-4 right" onclick="window.scrollTo(0, 0);" routerLink="">Pàgina Principal</a>
+              </div>
+            </div>
+          </footer>
 </div>

@@ -1,9 +1,10 @@
-<div class="login card blue-grey darken-1">
+<div class="login card blue darken-3">
     <form class="card-content white-text">
         <span class="card-title">Iniciar Sessió</span>
         <input required [(ngModel)]="dadesUsuari.usuari" name="nom" type="text" placeholder="Nom" />
         <input required [(ngModel)]="dadesUsuari.contrasenya" name="contrasenya" type="password" placeholder="Contrasenya">
-        <input (click)="iniciarUsuari()" class="waves-effect waves-light btn" type="button" value="Iniciar">
-        <div><a class="card-action" routerLink="/registrar" routerLinkActive="active">registrar</a></div>
+        <input (click)="iniciarUsuari()" class="waves-effect waves-light btn boton blue darken-1" type="button" value="Iniciar">
+        <div style="padding-top: 5px; padding-bottom: 5px"><a class="card-action" routerLink="/registrar" routerLinkActive="active">Registrar</a></div>
+        <input style="color: white" type="checkbox" [(ngModel)]="mantenirSessio" id="cbox2" name="mantenirSessio" value="mantenirSessio"> <label for="cbox2" style="color:white">No tancar sessió</label>
     </form>
 </div>

@@ -17,14 +17,24 @@ export class AutentificacioService {
     }
 
     usuariLogeat(){
-        return !!localStorage.getItem("token");
+        if(localStorage.getItem("token") != null){
+            return true;
+        }else if(sessionStorage.getItem("token") != null){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     getToken(){
-        return localStorage.getItem("token");
+        if(localStorage.getItem("token") != null){
+            return localStorage.getItem("token");
+        }
+        return sessionStorage.getItem("token");
     }
 
     eliminarToken(){
         localStorage.removeItem("token");
+        sessionStorage.removeItem("token");
     }
 }
